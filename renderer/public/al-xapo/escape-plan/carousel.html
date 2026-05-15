@@ -1,0 +1,580 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=1080, initial-scale=1" />
+<title>Escape Plan: New Age Heist — IG Carousel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Big+Shoulders+Display:wght@900&family=Permanent+Marker&family=Rock+Salt&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  /* === DESIGN TOKENS === */
+  :root{
+    --oxblood:   #8B0F1B;
+    --oxblood-2: #5F0810;
+    --orange:    #D8541E;
+    --orange-2:  #F26B2C;
+    --concrete:  #9A9A9A;
+    --concrete-2:#6E6A66;
+    --bone:      #F2EAE0;
+    --bone-2:    #D8CFC3;
+    --ink:       #0A0A0A;
+    --ink-2:     #141414;
+
+    --display:   "Big Shoulders Display","Anton","Impact",sans-serif;
+    --display-2: "Bebas Neue","Anton",sans-serif;
+    --brush:     "Permanent Marker","Rock Salt",cursive;
+    --mono:      "JetBrains Mono",ui-monospace,monospace;
+
+    /* 8pt rhythm */
+    --s1: 8px; --s2:16px; --s3:24px; --s4:32px; --s5:48px;
+    --s6:64px; --s7:96px; --s8:128px;
+
+    --slide-w: 1080px;
+    --slide-h: 1350px;
+    --safe:    64px;
+  }
+
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:#0a0a0a;color:var(--bone);font-family:var(--mono);-webkit-font-smoothing:antialiased}
+
+  /* === DECK SHELL === */
+  .deck{
+    display:flex;flex-direction:column;align-items:center;
+    gap:48px;padding:48px 0;
+  }
+  @media print{ .deck{gap:0;padding:0} .nav,.tabs{display:none!important} }
+
+  .slide{
+    position:relative;width:var(--slide-w);height:var(--slide-h);
+    overflow:hidden;background:var(--ink);
+    box-shadow:0 24px 80px rgba(0,0,0,.5),0 0 0 1px rgba(255,255,255,.04);
+    page-break-after:always;break-after:page;
+    color:var(--bone);
+  }
+
+  /* === REUSABLE NOISE / GRAIN === */
+  .grain{
+    position:absolute;inset:0;pointer-events:none;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .55 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    background-size:240px 240px;mix-blend-mode:overlay;opacity:.35;
+  }
+  .scratch{
+    position:absolute;inset:0;pointer-events:none;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='600'><filter id='s'><feTurbulence baseFrequency='0.02 0.6' numOctaves='2'/><feColorMatrix values='0 0 0 0 .9  0 0 0 0 .85  0 0 0 0 .8  0 0 0 .22 0'/></filter><rect width='100%25' height='100%25' filter='url(%23s)'/></svg>");
+    background-size:cover;mix-blend-mode:screen;opacity:.18;
+  }
+
+  /* === CHROME / METAL TEXT EFFECT === */
+  .chrome{
+    background:
+      linear-gradient(180deg,
+        #F2EAE0 0%, #C9C0B4 28%, #6E6A66 50%,
+        #F2EAE0 62%, #9A9A9A 78%, #4A4541 100%);
+    -webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;color:transparent;
+    text-shadow:0 2px 0 rgba(0,0,0,.4);
+    filter:drop-shadow(0 6px 0 rgba(0,0,0,.55)) drop-shadow(0 0 1px rgba(0,0,0,.9));
+  }
+
+  /* === SAFE-ZONE LAYOUT === */
+  .frame{
+    position:absolute;inset:var(--safe);display:flex;flex-direction:column;
+    z-index:3;
+  }
+
+  /* === TOP STAMP === */
+  .stamp{
+    display:inline-flex;align-items:center;gap:12px;
+    padding:10px 18px;
+    border:1.5px solid var(--bone);
+    background:rgba(0,0,0,.35);
+    backdrop-filter:blur(2px);
+    font-family:var(--mono);font-weight:700;
+    font-size:13px;letter-spacing:4px;text-transform:uppercase;color:var(--bone);
+  }
+  .stamp .dot{width:8px;height:8px;background:var(--oxblood);border-radius:50%}
+
+  /* === DSP STRIP === */
+  .dsps{
+    display:flex;flex-wrap:wrap;justify-content:center;align-items:center;
+    gap:16px 20px;
+    padding-top:var(--s4);
+    border-top:1.5px solid rgba(242,234,224,.18);
+    font-family:var(--mono);font-weight:700;font-size:15px;
+    letter-spacing:3px;text-transform:uppercase;color:var(--bone);
+    line-height:1;
+  }
+  .dsps span{opacity:.92}
+  .dsps em{font-style:normal;color:var(--oxblood);opacity:.9;font-weight:700}
+
+  /* === LVRN WORDMARK === */
+  .lvrn{
+    position:absolute;bottom:24px;left:0;right:0;
+    display:flex;justify-content:center;
+    font-family:var(--mono);font-weight:700;font-size:12px;
+    letter-spacing:8px;color:var(--concrete);text-transform:uppercase;
+    opacity:.7;z-index:4;
+  }
+
+  /* === SLIDE INDEX === */
+  .slide-no{
+    position:absolute;top:24px;right:32px;z-index:4;
+    font-family:var(--mono);font-size:12px;font-weight:700;
+    color:var(--concrete);letter-spacing:3px;opacity:.6;
+  }
+
+  /* ==========================================================
+     SLIDE 1 + 4 — OUT NOW / PRE-SAVE HERO
+  ========================================================== */
+  .hero{ background:var(--ink); }
+  .hero .bg{
+    position:absolute;inset:0;
+    background:radial-gradient(ellipse at center, #1c1815 0%, #0a0a0a 70%);
+  }
+  .hero .frame{
+    justify-content:space-between;align-items:center;text-align:center;
+  }
+  .hero .topblock{display:flex;flex-direction:column;align-items:center;gap:18px;width:100%}
+  .hero h1{
+    font-family:var(--display);font-weight:900;
+    font-size:170px;line-height:.86;letter-spacing:-2px;
+    text-transform:uppercase;
+  }
+  .hero .duo{
+    font-family:var(--mono);font-size:18px;font-weight:700;
+    letter-spacing:9px;color:var(--bone);text-transform:uppercase;
+  }
+  .hero .cover-wrap{
+    position:relative;width:720px;height:720px;
+    border:6px solid var(--bone);
+    box-shadow:
+      0 0 0 14px var(--ink),
+      0 0 0 16px var(--oxblood),
+      0 30px 60px rgba(0,0,0,.65);
+    transform:rotate(-1.2deg);
+  }
+  .hero .cover-wrap img{width:100%;height:100%;object-fit:cover;display:block}
+  .hero .cover-corner{
+    position:absolute;font-family:var(--mono);font-size:12px;font-weight:700;
+    color:var(--bone);background:var(--oxblood);
+    padding:8px 12px;letter-spacing:3px;text-transform:uppercase;
+    bottom:-18px;right:-12px;transform:rotate(2deg);
+    box-shadow:0 6px 18px rgba(0,0,0,.5);
+  }
+  .hero .dsps{width:100%}
+
+  /* drip accent */
+  .drip{
+    position:absolute;top:0;left:48px;width:80px;height:240px;
+    background:var(--oxblood);
+    clip-path:polygon(0 0,100% 0,100% 70%,80% 78%,90% 88%,72% 95%,82% 100%,55% 100%,60% 90%,35% 88%,42% 78%,0 80%);
+    opacity:.92;filter:drop-shadow(0 4px 0 rgba(0,0,0,.4));
+    z-index:2;
+  }
+  .drip.right{left:auto;right:48px;transform:scaleX(-1)}
+
+  /* ==========================================================
+     SLIDE 2 — TITLE REVEAL
+  ========================================================== */
+  .title-slide{background:var(--ink)}
+  .title-slide .bg{
+    position:absolute;inset:0;
+    background-image:url("./shot-01.jpg");
+    background-size:cover;background-position:center;
+    filter:grayscale(.5) contrast(1.15) brightness(.5);
+  }
+  .title-slide .vignette{
+    position:absolute;inset:0;
+    background:
+      radial-gradient(ellipse at center, transparent 30%, rgba(10,10,10,.85) 100%),
+      linear-gradient(180deg, rgba(10,10,10,.4) 0%, rgba(139,15,27,.25) 50%, rgba(10,10,10,.9) 100%);
+  }
+  .title-slide .frame{justify-content:center;align-items:center;text-align:center;gap:var(--s5)}
+  .title-slide .escape{
+    font-family:var(--display);font-weight:900;
+    font-size:240px;line-height:.84;letter-spacing:-4px;
+    text-transform:uppercase;
+  }
+  .title-slide .nah{
+    font-family:var(--brush);
+    font-size:96px;line-height:1;color:var(--oxblood);
+    transform:rotate(-3deg);
+    text-shadow:4px 4px 0 var(--ink), 0 0 24px rgba(139,15,27,.5);
+  }
+  .title-slide .ep-tag{
+    margin-top:var(--s4);
+    display:inline-flex;align-items:center;gap:16px;
+    padding:14px 28px;border:2px solid var(--bone);
+    font-family:var(--mono);font-size:18px;font-weight:700;
+    letter-spacing:8px;text-transform:uppercase;
+  }
+  .title-slide .ep-tag::before,
+  .title-slide .ep-tag::after{
+    content:"";width:24px;height:2px;background:var(--bone);
+  }
+
+  /* ==========================================================
+     SLIDE 3 — QUOTE
+  ========================================================== */
+  .quote-slide{background:var(--ink)}
+  .quote-slide .bg{
+    position:absolute;inset:0;
+    background:
+      radial-gradient(ellipse at 30% 20%, rgba(139,15,27,.4) 0%, transparent 50%),
+      radial-gradient(ellipse at 70% 80%, rgba(216,84,30,.25) 0%, transparent 60%),
+      var(--ink);
+  }
+  .quote-slide .tags{
+    position:absolute;color:rgba(139,15,27,.18);
+    font-family:var(--brush);font-size:380px;line-height:.85;
+    pointer-events:none;user-select:none;text-transform:uppercase;
+    z-index:1;
+  }
+  .quote-slide .tags.t1{top:-80px;left:-30px;transform:rotate(-8deg)}
+  .quote-slide .tags.t2{bottom:-120px;right:-40px;transform:rotate(6deg)}
+  .quote-slide .frame{
+    justify-content:space-between;align-items:flex-start;
+  }
+  .quote-slide .qmark{
+    font-family:var(--brush);font-size:200px;line-height:1;
+    color:var(--oxblood);transform:translateY(-30px) rotate(-4deg);
+  }
+  .quote-slide blockquote{
+    font-family:var(--brush);font-weight:400;
+    font-size:140px;line-height:1.02;color:var(--bone);
+    letter-spacing:-1px;max-width:880px;
+    transform:rotate(-1.5deg);
+    text-shadow:6px 6px 0 var(--oxblood-2);
+  }
+  .quote-slide .attrib{
+    display:flex;align-items:center;gap:18px;
+    font-family:var(--mono);font-size:18px;font-weight:700;
+    letter-spacing:6px;color:var(--bone);text-transform:uppercase;
+  }
+  .quote-slide .attrib .bar{width:64px;height:2px;background:var(--oxblood)}
+
+  /* ==========================================================
+     SLIDE 5 — DROPPING SOON / EVIDENCE FRAME
+  ========================================================== */
+  .drop-slide{background:var(--bone)}
+  .drop-slide .bg{
+    position:absolute;inset:0;
+    background:
+      repeating-linear-gradient(45deg,
+        var(--bone) 0px, var(--bone) 22px,
+        var(--bone-2) 22px, var(--bone-2) 24px);
+    opacity:.6;
+  }
+  .drop-slide .tape{
+    position:absolute;left:-80px;right:-80px;height:80px;
+    background:
+      repeating-linear-gradient(90deg,
+        var(--ink) 0 40px, var(--orange) 40px 200px,
+        var(--ink) 200px 240px, var(--orange) 240px 400px);
+    color:var(--ink);font-family:var(--display);font-weight:900;
+    font-size:48px;letter-spacing:8px;
+    display:flex;align-items:center;justify-content:center;
+    text-transform:uppercase;
+  }
+  .drop-slide .tape.top{top:140px;transform:rotate(-3deg)}
+  .drop-slide .tape.bot{bottom:280px;transform:rotate(2deg)}
+  .drop-slide .tape-text{
+    display:flex;gap:48px;white-space:nowrap;
+    text-shadow:2px 2px 0 var(--bone-2);
+  }
+  .drop-slide .frame{justify-content:center;align-items:center;text-align:center;z-index:3}
+  .drop-slide .dropping{
+    font-family:var(--display);font-weight:900;color:var(--ink);
+    font-size:200px;line-height:.85;letter-spacing:-3px;
+    text-transform:uppercase;
+  }
+  .drop-slide .soon{color:var(--oxblood);transform:rotate(-2deg);display:block}
+  .drop-slide .date-stamp{
+    margin-top:var(--s5);
+    padding:24px 40px;background:var(--ink);color:var(--bone);
+    font-family:var(--mono);font-size:24px;font-weight:700;
+    letter-spacing:10px;text-transform:uppercase;
+    transform:rotate(1deg);
+    box-shadow:8px 8px 0 var(--oxblood);
+  }
+  .drop-slide .case-no{
+    margin-top:var(--s3);
+    font-family:var(--mono);font-size:14px;font-weight:700;
+    letter-spacing:6px;color:var(--concrete-2);text-transform:uppercase;
+  }
+  .drop-slide .lvrn{color:var(--ink);opacity:.6}
+
+  /* ==========================================================
+     SLIDE 6 — CTA OUTRO
+  ========================================================== */
+  .cta-slide{background:var(--oxblood)}
+  .cta-slide .bg{
+    position:absolute;inset:0;
+    background:
+      radial-gradient(ellipse at 20% 0%, rgba(0,0,0,.55) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 100%, rgba(0,0,0,.5) 0%, transparent 60%),
+      var(--oxblood);
+  }
+  .cta-slide .frame{justify-content:space-between;align-items:flex-start;text-align:left}
+  .cta-slide h2{
+    font-family:var(--display);font-weight:900;
+    font-size:220px;line-height:.84;letter-spacing:-3px;color:var(--bone);
+    text-transform:uppercase;
+  }
+  .cta-slide .link{
+    font-family:var(--brush);font-size:88px;color:var(--bone);
+    transform:rotate(-2deg);margin-top:var(--s3);
+    text-shadow:4px 4px 0 var(--oxblood-2);
+  }
+  .cta-slide .handles{
+    display:flex;flex-direction:column;gap:var(--s2);
+    font-family:var(--mono);font-size:24px;font-weight:700;
+    letter-spacing:4px;color:var(--bone);text-transform:uppercase;
+    padding-top:var(--s4);border-top:2px solid var(--bone);
+    width:100%;
+  }
+  .cta-slide .handles span{display:flex;align-items:center;gap:16px}
+  .cta-slide .handles .arrow{color:var(--bone);opacity:.5}
+  .cta-slide .drip-big{
+    position:absolute;top:0;left:60%;width:200px;height:520px;
+    background:var(--ink);
+    clip-path:polygon(0 0,100% 0,100% 60%,85% 65%,92% 78%,72% 82%,80% 92%,55% 90%,62% 100%,40% 92%,48% 82%,28% 80%,35% 70%,12% 68%,20% 58%,0 55%);
+    opacity:.65;z-index:1;
+  }
+  .cta-slide .lvrn{color:var(--bone);opacity:.85;letter-spacing:12px}
+
+  /* ==========================================================
+     NAV
+  ========================================================== */
+  .nav{
+    position:fixed;bottom:24px;left:50%;transform:translateX(-50%);
+    background:rgba(20,20,20,.92);border:1px solid #2a2a2a;
+    padding:10px 18px;border-radius:999px;
+    display:flex;gap:14px;align-items:center;
+    font-family:"JetBrains Mono",monospace;font-size:12px;
+    color:#9a9a9a;z-index:100;backdrop-filter:blur(8px);
+  }
+  .nav button{
+    background:transparent;border:1px solid #2a2a2a;color:#bbb;
+    padding:6px 10px;border-radius:999px;font:inherit;cursor:pointer;
+  }
+  .nav button:hover{border-color:var(--oxblood);color:var(--bone)}
+  .nav .count{color:var(--bone);font-weight:700;min-width:60px;text-align:center}
+</style>
+</head>
+<body>
+
+<div class="deck" id="deck">
+
+  <!-- ========================================================
+       SLIDE 1 — OUT NOW HERO
+  ======================================================== -->
+  <section class="slide hero" id="s1">
+    <div class="bg"></div>
+    <div class="drip"></div>
+    <div class="drip right"></div>
+    <div class="slide-no">01 / 06</div>
+
+    <div class="frame">
+      <div class="topblock">
+        <div class="stamp"><span class="dot"></span>NOW STREAMING · 2026</div>
+        <h1 class="chrome">OUT&nbsp;NOW</h1>
+        <div class="duo">Al Xapo &nbsp;×&nbsp; Benzzo</div>
+      </div>
+
+      <div class="cover-wrap">
+        <img src="./cover.jpg" alt="Escape Plan EP cover" />
+        <div class="cover-corner">NEW AGE HEIST · EP</div>
+      </div>
+
+      <div class="dsps">
+        <span>Spotify</span><em>·</em>
+        <span>Apple Music</span><em>·</em>
+        <span>YouTube Music</span><em>·</em>
+        <span>Audiomack</span><em>·</em>
+        <span>Boomplay</span><em>·</em>
+        <span>Tidal</span><em>·</em>
+        <span>Deezer</span>
+      </div>
+    </div>
+    <div class="grain"></div>
+    <div class="scratch"></div>
+    <div class="lvrn">LVRN · 2026</div>
+  </section>
+
+  <!-- ========================================================
+       SLIDE 2 — TITLE REVEAL
+  ======================================================== -->
+  <section class="slide title-slide" id="s2">
+    <div class="bg"></div>
+    <div class="vignette"></div>
+    <div class="slide-no" style="color:var(--bone)">02 / 06</div>
+
+    <div class="frame">
+      <h1 class="escape chrome">Escape<br/>Plan</h1>
+      <div class="nah">New Age Heist</div>
+      <div class="ep-tag">EP · OUT 2026</div>
+    </div>
+
+    <div class="grain"></div>
+    <div class="scratch"></div>
+    <div class="lvrn" style="color:var(--bone-2)">AL XAPO · BENZZO · LVRN</div>
+  </section>
+
+  <!-- ========================================================
+       SLIDE 3 — VIBE QUOTE
+  ======================================================== -->
+  <section class="slide quote-slide" id="s3">
+    <div class="bg"></div>
+    <div class="tags t1">RUN</div>
+    <div class="tags t2">PLOT</div>
+    <div class="slide-no">03 / 06</div>
+
+    <div class="frame">
+      <div class="stamp"><span class="dot"></span>EP · 2026 · LVRN</div>
+      <blockquote style="margin-top:48px">
+        New<br/>Age<br/>Heist
+      </blockquote>
+      <div class="attrib">
+        <span class="bar"></span>
+        Al Xapo &nbsp;×&nbsp; Benzzo
+      </div>
+    </div>
+
+    <div class="grain"></div>
+    <div class="scratch"></div>
+    <div class="lvrn">EP · ESCAPE PLAN</div>
+  </section>
+
+  <!-- ========================================================
+       SLIDE 4 — PRE-SAVE HERO
+  ======================================================== -->
+  <section class="slide hero" id="s4">
+    <div class="bg"></div>
+    <div class="drip" style="background:var(--orange)"></div>
+    <div class="drip right" style="background:var(--orange)"></div>
+    <div class="slide-no">04 / 06</div>
+
+    <div class="frame">
+      <div class="topblock">
+        <div class="stamp"><span class="dot" style="background:var(--orange)"></span>PRE-ORDER OPEN</div>
+        <h1 class="chrome">PRE-SAVE</h1>
+        <div class="duo">Al Xapo &nbsp;×&nbsp; Benzzo</div>
+      </div>
+
+      <div class="cover-wrap" style="box-shadow:0 0 0 14px var(--ink),0 0 0 16px var(--orange),0 30px 60px rgba(0,0,0,.65)">
+        <img src="./cover.jpg" alt="Escape Plan EP cover" />
+        <div class="cover-corner" style="background:var(--orange);color:var(--ink)">DROPS 2026</div>
+      </div>
+
+      <div class="dsps">
+        <span>Spotify</span><em style="color:var(--orange)">·</em>
+        <span>Apple Music</span><em style="color:var(--orange)">·</em>
+        <span>YouTube Music</span><em style="color:var(--orange)">·</em>
+        <span>Audiomack</span><em style="color:var(--orange)">·</em>
+        <span>Boomplay</span><em style="color:var(--orange)">·</em>
+        <span>Tidal</span><em style="color:var(--orange)">·</em>
+        <span>Deezer</span>
+      </div>
+    </div>
+    <div class="grain"></div>
+    <div class="scratch"></div>
+    <div class="lvrn">LVRN · PRE-SAVE</div>
+  </section>
+
+  <!-- ========================================================
+       SLIDE 5 — DROPPING SOON
+  ======================================================== -->
+  <section class="slide drop-slide" id="s5">
+    <div class="bg"></div>
+    <div class="tape top">
+      <div class="tape-text">
+        <span>EVIDENCE</span><span>·</span><span>EVIDENCE</span><span>·</span><span>EVIDENCE</span>
+      </div>
+    </div>
+    <div class="tape bot">
+      <div class="tape-text">
+        <span>DO NOT CROSS</span><span>·</span><span>DO NOT CROSS</span><span>·</span><span>DO NOT</span>
+      </div>
+    </div>
+    <div class="slide-no" style="color:var(--ink)">05 / 06</div>
+
+    <div class="frame">
+      <div class="dropping">
+        Dropping<br/><span class="soon">Soon</span>
+      </div>
+      <div class="date-stamp">OUT 2026</div>
+      <div class="case-no">CASE NO. EP-007 · NEW AGE HEIST</div>
+    </div>
+
+    <div class="grain"></div>
+    <div class="lvrn">LVRN · AL XAPO · BENZZO</div>
+  </section>
+
+  <!-- ========================================================
+       SLIDE 6 — CTA OUTRO
+  ======================================================== -->
+  <section class="slide cta-slide" id="s6">
+    <div class="bg"></div>
+    <div class="drip-big"></div>
+    <div class="slide-no" style="color:var(--bone)">06 / 06</div>
+
+    <div class="frame">
+      <div>
+        <h2>Stream<br/>Now.</h2>
+        <div class="link">link in bio</div>
+      </div>
+
+      <div class="handles">
+        <span><span class="arrow">→</span> @alxapo</span>
+        <span><span class="arrow">→</span> @benzzo</span>
+        <span><span class="arrow">→</span> @lvrnmusic</span>
+      </div>
+    </div>
+
+    <div class="grain"></div>
+    <div class="scratch"></div>
+    <div class="lvrn">LVRN · 2026 · NEW AGE HEIST</div>
+  </section>
+
+</div>
+
+<!-- KEYBOARD NAV -->
+<div class="nav">
+  <button onclick="nav(-1)">◀ prev</button>
+  <span class="count" id="count">01 / 06</span>
+  <button onclick="nav(1)">next ▶</button>
+  <button onclick="window.print()" style="border-color:var(--oxblood);color:var(--bone)">⤓ PDF</button>
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  let i = 0;
+  function go(n){
+    i = Math.max(0, Math.min(slides.length - 1, n));
+    slides[i].scrollIntoView({behavior:'smooth', block:'center'});
+    document.getElementById('count').textContent =
+      String(i+1).padStart(2,'0') + ' / 06';
+  }
+  function nav(d){ go(i + d); }
+  document.addEventListener('keydown', e => {
+    if(e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' '){ e.preventDefault(); nav(1); }
+    if(e.key === 'ArrowLeft'  || e.key === 'PageUp')  { e.preventDefault(); nav(-1); }
+    if(e.key === 'Home'){ go(0); }
+    if(e.key === 'End'){ go(slides.length - 1); }
+  });
+  // update count as user scrolls
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.intersectionRatio > 0.6){
+        const idx = [...slides].indexOf(e.target);
+        if(idx >= 0){ i = idx; document.getElementById('count').textContent =
+          String(idx+1).padStart(2,'0') + ' / 06'; }
+      }
+    });
+  }, {threshold:[0.6]});
+  slides.forEach(s => io.observe(s));
+</script>
+</body>
+</html>

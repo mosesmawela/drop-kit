@@ -2,6 +2,10 @@
 renderer/out/
 renderer/.remotion/
 
+# Heavy source assets (keep cover, ignore raw shoot)
+renderer/public/**/shot-*.jpg
+renderer/public/**/motion.jpg
+
 # Node
 renderer/node_modules/
 node_modules/
