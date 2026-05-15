@@ -1,0 +1,27 @@
+# Remotion outputs
+renderer/out/
+renderer/.remotion/
+
+# Node
+renderer/node_modules/
+node_modules/
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+.idea/
+
+# Env
+.env
+.env.local
+
+# Build artifacts
+renderer/build/
+renderer/.cache/

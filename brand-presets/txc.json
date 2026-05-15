@@ -1,0 +1,14 @@
+{
+  "slug": "txc",
+  "name": "TxC",
+  "cool": "#7C3AED",
+  "warm": "#EC4899",
+  "bg": "#0a0a0a",
+  "bg-2": "#141414",
+  "fg": "#f5f5f5",
+  "fg-dim": "#9a9a9a",
+  "line": "#2a2a2a",
+  "fonts": { "display": "Anton, Impact, sans-serif", "body": "Inter, system-ui, sans-serif" },
+  "tags": ["female-duo", "gqom-pop", "club", "dance"],
+  "port": 5520
+}
