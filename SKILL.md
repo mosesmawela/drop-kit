@@ -34,18 +34,42 @@ One skill, two engines. Canva MCP handles brand-templated static graphics. Remot
 
 **Default pack for a single release:** 1× square feed, 1× 4:5 carousel (3 slides), 1× 9:16 story still, 1× 9:16 reel teaser (6–10s). Confirm before generating if any are unwanted.
 
-## Step 1 — gather the brief
+## 🚫 Hard rules — non-negotiable
+
+These are codified from production feedback. Violating them = re-doing the work.
+
+1. **NEVER use any image the user has not explicitly provided** for this specific drop. Do not pull from their other folders, EPKs, prior releases, photoshoot archives, ImageKit, or anywhere else "to be helpful." If you don't have an image for a slide, use a brand-only treatment (gradient + brush-script ghost mark + safe-zone type) — never substitute one.
+2. **All header type uses Akira Expanded** — house font, served from `renderer/public/fonts/akira-expanded.otf`. Applies to: OUT NOW, PRE-SAVE, ESCAPE PLAN/title reveals, DROPPING SOON, STREAM NOW, all hero lockups. Body/mono stays JetBrains Mono. Brush stays Permanent Marker.
+3. **DSP logos are always real SVGs, never text labels.** Inline the SVGs from `renderer/public/logos/dsp/` directly into the HTML so `file://` rendering works. Use `fill="currentColor"` so the icon color follows the brand accent.
+4. **Confirm the full brief back to the user before generating anything.** No assumptions, no "I'll just guess."
+
+## Step 1 — gather the brief (MANDATORY 4-image briefing for releases)
 
 Before touching any tool, get these from the user (ask if missing):
+
+### Release / EP / single — ALWAYS ask for these 4 images upfront
+
+| Image | Goes on slide(s) | Notes |
+|---|---|---|
+| **1 · Cover art** | OUT NOW hero (s1), PRE-SAVE hero (s4) | The actual artwork. ImageKit URL or local path. |
+| **2 · Album text + quote PR shot** | Title reveal (s2), New Age Heist focal (s3) | PR/photoshoot still used as background under the chrome title + the brush-script quote slide. |
+| **3 · Stream Now PR shot** | CTA outro (s6) | PR shot used as background behind the Stream Now lockup. |
+| **4 · Dropping Soon PR shot** | Dropping Soon (s5) | PR shot used as background behind the evidence-tape countdown. |
+
+**That's 1 cover + 3 PR images = 4 total.** Ask exactly this — "send me the 4 images: the cover, plus PR shots for title/quote, Stream Now, and Dropping Soon."
+
+If the user only provides some images, use brand-only treatments for the missing slides — **do not substitute any image you find on disk**.
+
+### Other release brief fields
 
 1. **Artist** — Al Xapo / CIZA / TxC / Chlé / KaygeeRSA / Ggoldie / other (other → ask for 2 brand colors)
 2. **Drop type** — `single` / `EP/album` / `feature` / `tour-date` / `news` / `press-feature` / `milestone`
 3. **Title** — track / release / news headline
 4. **Date** — release date or event date (or "out now")
-5. **Cover art / hero image URL** — ImageKit URL preferred; placeholder if none
-6. **Platforms/DSPs** — Spotify, Apple, YouTube, etc. (for the "stream now" CTAs)
-7. **Copy** — taglines, body text. Offer to draft if user passes.
-8. **Targets** — which formats from the matrix (default the pack above)
+5. **Platforms/DSPs** — default = Spotify · Apple Music · YouTube Music · Audiomack · Boomplay · Tidal · Deezer (SA priority order). Use the inline SVGs.
+6. **Copy** — taglines, body text. Offer to draft if user passes.
+7. **Targets** — which formats from the matrix (default the pack above)
+8. **Song quote** (optional) — for slide 3 focal. If absent, slide 3 uses the EP title as the brush focal.
 
 Print the brief back to the user before generating. **Never assume** — confirm.
 
