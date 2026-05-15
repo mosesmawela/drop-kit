@@ -1,0 +1,445 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=1080, initial-scale=1" />
+<title>Jazzino · OUT NOW — 5 design directions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Big+Shoulders+Display:wght@900&family=Permanent+Marker&family=Rock+Salt&family=Caveat+Brush&family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  /* ============================================================
+     HOUSE FONT
+  ============================================================ */
+  @font-face{
+    font-family:"Akira Expanded";
+    src:url("../../fonts/akira-expanded.otf") format("opentype");
+    font-weight:900;font-style:normal;font-display:swap;
+  }
+
+  /* ============================================================
+     GLOBAL TOKENS
+  ============================================================ */
+  :root{
+    --oxblood:#DC2626; --oxblood-2:#8B0F1B;
+    --orange:#FBBF24;  --orange-2:#F59E0B;
+    --concrete:#9A9A9A; --concrete-2:#6E6A66;
+    --bone:#F2EAE0; --bone-2:#D8CFC3; --bone-3:#EFE9DF;
+    --ink:#0A0A0A; --ink-2:#141414; --ink-3:#1F1B19;
+    --paper:#F7F4EE;
+
+    --display:"Akira Expanded","Big Shoulders Display","Anton",sans-serif;
+    --brush:"Permanent Marker","Caveat Brush",cursive;
+    --mono:"JetBrains Mono",ui-monospace,monospace;
+    --serif:"Cormorant Garamond","Times New Roman",serif;
+    --sans:"Inter",system-ui,sans-serif;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:#0a0a0a;color:var(--bone);font-family:var(--mono);-webkit-font-smoothing:antialiased}
+  .deck{display:flex;flex-direction:column;align-items:center;gap:64px;padding:64px 0}
+
+  .slide{
+    position:relative;width:1080px;height:1350px;
+    overflow:hidden;
+    box-shadow:0 24px 80px rgba(0,0,0,.5),0 0 0 1px rgba(255,255,255,.04);
+    page-break-after:always;break-after:page;
+  }
+
+  .badge{
+    position:absolute;top:20px;left:24px;z-index:50;
+    padding:6px 12px;background:rgba(0,0,0,.6);color:#fff;
+    font-family:var(--mono);font-size:11px;font-weight:700;
+    letter-spacing:2px;text-transform:uppercase;backdrop-filter:blur(8px);
+    border:1px solid rgba(255,255,255,.18);
+  }
+
+  /* shared textures */
+  .grain{position:absolute;inset:0;pointer-events:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .55 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");background-size:240px;mix-blend-mode:overlay;opacity:.3}
+
+  .chrome{
+    background:linear-gradient(180deg,#F2EAE0 0%,#C9C0B4 28%,#6E6A66 50%,#F2EAE0 62%,#9A9A9A 78%,#4A4541 100%);
+    -webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;color:transparent;
+    filter:drop-shadow(0 4px 0 rgba(0,0,0,.5));
+  }
+
+  /* shared DSP icon style */
+  .dsp{width:38px;height:38px;flex:0 0 auto;display:block;opacity:.92}
+
+  /* ============================================================
+     V1 — BRUTALIST HEIST (house drop-kit style)
+  ============================================================ */
+  .v1{background:var(--ink);color:var(--bone)}
+  .v1 .bg{position:absolute;inset:0;background:radial-gradient(ellipse at center,#1c1815 0%,#0a0a0a 70%)}
+  .v1 .drip{position:absolute;top:0;left:48px;width:80px;height:240px;background:var(--oxblood);clip-path:polygon(0 0,100% 0,100% 70%,80% 78%,90% 88%,72% 95%,82% 100%,55% 100%,60% 90%,35% 88%,42% 78%,0 80%);opacity:.92;filter:drop-shadow(0 4px 0 rgba(0,0,0,.4))}
+  .v1 .drip.right{left:auto;right:48px;transform:scaleX(-1)}
+  .v1 .frame{position:absolute;inset:64px;display:flex;flex-direction:column;align-items:center;justify-content:space-between;text-align:center}
+  .v1 .stamp{display:inline-flex;align-items:center;gap:10px;padding:8px 14px;border:1.5px solid var(--bone);background:rgba(0,0,0,.35);font-family:var(--mono);font-weight:700;font-size:12px;letter-spacing:3px;text-transform:uppercase}
+  .v1 .stamp .dot{width:7px;height:7px;background:var(--oxblood);border-radius:50%}
+  .v1 .topblock{display:flex;flex-direction:column;align-items:center;gap:14px;width:100%}
+  .v1 h1{font-family:var(--display);font-size:108px;line-height:.92;letter-spacing:-1px;text-transform:uppercase}
+  .v1 .duo{font-family:var(--mono);font-size:13px;font-weight:700;letter-spacing:5px;line-height:1.65;text-align:center;max-width:920px;text-transform:uppercase}
+  .v1 .duo .feat{color:var(--orange)}
+  .v1 .cover-wrap{position:relative;width:680px;height:680px;border:6px solid var(--bone);box-shadow:0 0 0 14px var(--ink),0 0 0 16px var(--oxblood),0 30px 60px rgba(0,0,0,.65);transform:rotate(-1.2deg)}
+  .v1 .cover-wrap img{width:100%;height:100%;object-fit:cover;display:block}
+  .v1 .cover-corner{position:absolute;font-family:var(--mono);font-size:11px;font-weight:700;color:var(--bone);background:var(--oxblood);padding:7px 11px;letter-spacing:3px;text-transform:uppercase;bottom:-16px;right:-12px;transform:rotate(2deg);box-shadow:0 6px 18px rgba(0,0,0,.5)}
+  .v1 .dsps{display:flex;justify-content:center;align-items:center;gap:30px;padding-top:28px;border-top:1.5px solid rgba(242,234,224,.18);color:var(--bone);width:100%}
+  .v1 .lvrn{position:absolute;bottom:20px;left:0;right:0;display:flex;justify-content:center;font-family:var(--mono);font-weight:700;font-size:11px;letter-spacing:8px;color:var(--concrete);text-transform:uppercase;opacity:.7;z-index:4}
+
+  /* ============================================================
+     V2 — PENTAGRAM GRID (Swiss info-arch)
+  ============================================================ */
+  .v2{background:var(--bone);color:var(--ink)}
+  .v2 .frame{position:absolute;inset:0;display:grid;grid-template-columns:repeat(12,1fr);grid-template-rows:auto auto 1fr auto;gap:24px;padding:64px;font-family:var(--mono)}
+  .v2 .row-top{grid-column:1 / -1;display:flex;justify-content:space-between;align-items:center;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--ink)}
+  .v2 .row-top .left{display:flex;gap:24px;align-items:center}
+  .v2 .row-top .dot{width:8px;height:8px;background:var(--oxblood);border-radius:50%;display:inline-block}
+  .v2 .big{grid-column:1 / -1;display:flex;align-items:flex-end;gap:24px}
+  .v2 .big h1{font-family:var(--display);font-size:200px;line-height:.85;letter-spacing:-4px;color:var(--ink);text-transform:uppercase}
+  .v2 .big .meta{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:2px;color:var(--ink);writing-mode:vertical-rl;transform:rotate(180deg);text-transform:uppercase;padding-bottom:20px;line-height:1.6}
+  .v2 .grid-body{grid-column:1 / -1;display:grid;grid-template-columns:repeat(12,1fr);gap:24px;margin-top:24px}
+  .v2 .cov{grid-column:1 / span 7;aspect-ratio:1;overflow:hidden;border:2px solid var(--ink)}
+  .v2 .cov img{width:100%;height:100%;object-fit:cover;display:block}
+  .v2 .specs{grid-column:8 / -1;display:flex;flex-direction:column;gap:18px;font-family:var(--mono);font-size:13px;color:var(--ink)}
+  .v2 .specs .row{display:flex;flex-direction:column;gap:4px;padding-bottom:14px;border-bottom:1px solid rgba(10,10,10,.18)}
+  .v2 .specs .row:last-child{border-bottom:0}
+  .v2 .specs .k{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--concrete-2);font-weight:700}
+  .v2 .specs .v{font-size:14px;font-weight:500;color:var(--ink);line-height:1.35}
+  .v2 .specs .v strong{font-weight:700}
+  .v2 .row-bot{grid-column:1 / -1;display:flex;justify-content:space-between;align-items:flex-end;font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase}
+  .v2 .dsps{display:flex;gap:18px;align-items:center;color:var(--ink)}
+  .v2 .dsps .dsp{width:30px;height:30px;opacity:.85}
+
+  /* ============================================================
+     V3 — KENYA HARA QUIET (东方极简)
+  ============================================================ */
+  .v3{background:var(--paper);color:var(--ink)}
+  .v3 .frame{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;padding:96px 96px 64px}
+  .v3 .head-row{display:flex;justify-content:space-between;align-items:flex-start;font-family:var(--mono);font-size:11px;font-weight:400;letter-spacing:3px;text-transform:uppercase;color:#777}
+  .v3 .head-row .right{text-align:right;line-height:1.7}
+  .v3 .cover-zone{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:80px;padding-top:30px}
+  .v3 .cov{width:340px;height:340px;overflow:hidden;box-shadow:0 18px 40px rgba(0,0,0,.18)}
+  .v3 .cov img{width:100%;height:100%;object-fit:cover;display:block}
+  .v3 .copy{display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center}
+  .v3 .out-now{font-family:var(--display);font-size:42px;letter-spacing:8px;color:var(--ink);text-transform:uppercase}
+  .v3 .out-now .dot{display:inline-block;width:6px;height:6px;background:var(--oxblood);border-radius:50%;margin:0 14px;vertical-align:middle}
+  .v3 .artist{font-family:var(--serif);font-size:36px;font-style:italic;font-weight:400;line-height:1.25;color:var(--ink);max-width:760px}
+  .v3 .rule{width:1px;height:64px;background:var(--ink);opacity:.4;margin:0 auto}
+  .v3 .foot{display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:10px;font-weight:400;letter-spacing:3px;text-transform:uppercase;color:#888}
+  .v3 .dsps{display:flex;gap:18px;align-items:center}
+  .v3 .dsps .dsp{width:22px;height:22px;color:#666;opacity:.7}
+
+  /* ============================================================
+     V4 — SAGMEISTER EXPERIMENTAL (brush-dominant, broken grid)
+  ============================================================ */
+  .v4{background:var(--bone-3);color:var(--ink);overflow:hidden}
+  .v4 .splat-1,.v4 .splat-2{position:absolute;font-family:var(--brush);color:var(--oxblood);user-select:none;pointer-events:none;line-height:.85;text-transform:uppercase}
+  .v4 .splat-1{top:-60px;left:-30px;font-size:520px;transform:rotate(-12deg);opacity:.92}
+  .v4 .splat-2{bottom:-90px;right:-40px;font-size:380px;transform:rotate(8deg);color:var(--ink);opacity:.95}
+  .v4 .cov-wrap{position:absolute;top:340px;left:160px;width:580px;height:580px;transform:rotate(-4deg);box-shadow:0 30px 60px rgba(0,0,0,.45);z-index:3;border:8px solid var(--bone)}
+  .v4 .cov-wrap img{width:100%;height:100%;object-fit:cover;display:block}
+  .v4 .scribble-arrow{position:absolute;left:740px;top:560px;font-family:var(--brush);font-size:54px;color:var(--ink);transform:rotate(-8deg);z-index:4;letter-spacing:1px;line-height:.95}
+  .v4 .scribble-arrow .lbl{font-size:16px;letter-spacing:6px;font-family:var(--mono);font-weight:700;display:block;margin-top:8px;text-transform:uppercase}
+  .v4 .tag-top{position:absolute;top:64px;left:64px;z-index:5;font-family:var(--mono);font-size:14px;font-weight:700;letter-spacing:4px;color:var(--ink);text-transform:uppercase;display:flex;gap:12px;align-items:center}
+  .v4 .tag-top .dot{width:10px;height:10px;background:var(--oxblood);border-radius:50%}
+  .v4 .artist-strip{position:absolute;top:130px;left:64px;right:64px;z-index:5;font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:4px;color:var(--ink);text-transform:uppercase;line-height:1.7}
+  .v4 .artist-strip .feat{color:var(--oxblood)}
+  .v4 .corner-mark{position:absolute;bottom:200px;left:64px;z-index:5;font-family:var(--brush);font-size:88px;color:var(--ink);line-height:.85;transform:rotate(-3deg)}
+  .v4 .ribbon{position:absolute;bottom:120px;left:64px;right:64px;z-index:5;display:flex;justify-content:space-between;align-items:center;padding:18px 24px;background:var(--ink);color:var(--bone);font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:4px;text-transform:uppercase}
+  .v4 .ribbon .dsps{display:flex;gap:16px;align-items:center;color:var(--bone)}
+  .v4 .ribbon .dsps .dsp{width:24px;height:24px}
+  .v4 .ribbon .left{display:flex;align-items:center;gap:14px}
+  .v4 .ribbon .left .arrow{font-size:20px;color:var(--oxblood)}
+  .v4 .lvrn{position:absolute;bottom:30px;left:0;right:0;display:flex;justify-content:center;font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:8px;color:var(--ink);opacity:.55;z-index:5;text-transform:uppercase}
+
+  /* ============================================================
+     V5 — FIELD.IO MOTION POSTER (chromatic + cyber)
+  ============================================================ */
+  .v5{background:#050505;color:var(--bone)}
+  .v5 .bg-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:60px 60px}
+  .v5 .scanlines{position:absolute;inset:0;background-image:repeating-linear-gradient(0deg,rgba(0,0,0,.5) 0px,rgba(0,0,0,.5) 1px,transparent 1px,transparent 3px);mix-blend-mode:multiply;opacity:.4;pointer-events:none}
+  .v5 .ring{position:absolute;border-radius:50%;border:1px dashed rgba(220,38,38,.45);pointer-events:none}
+  .v5 .ring.r1{width:880px;height:880px;top:200px;left:50%;transform:translateX(-50%);animation:none}
+  .v5 .ring.r2{width:780px;height:780px;top:250px;left:50%;transform:translateX(-50%);border-style:dotted;border-color:rgba(0,229,255,.35)}
+  .v5 .ring.r3{width:680px;height:680px;top:300px;left:50%;transform:translateX(-50%);border-color:rgba(220,38,38,.25);border-style:solid}
+  .v5 .ring-text{position:absolute;top:200px;left:50%;width:880px;height:880px;transform:translateX(-50%);pointer-events:none}
+  .v5 .ring-text svg{width:100%;height:100%}
+  .v5 .ring-text text{font-family:var(--mono);font-size:13px;font-weight:700;letter-spacing:6px;fill:rgba(242,234,224,.6);text-transform:uppercase}
+  .v5 .frame{position:absolute;inset:64px;display:flex;flex-direction:column;align-items:center;justify-content:space-between;z-index:5}
+  .v5 .top{display:flex;flex-direction:column;align-items:center;gap:14px;width:100%}
+  .v5 .stamp{display:inline-flex;align-items:center;gap:10px;padding:7px 14px;border:1px solid rgba(0,229,255,.55);color:#00E5FF;background:rgba(0,229,255,.06);font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase}
+  .v5 .stamp .dot{width:6px;height:6px;background:#00E5FF;border-radius:50%;box-shadow:0 0 8px #00E5FF}
+  .v5 h1{position:relative;font-family:var(--display);font-size:120px;line-height:.9;letter-spacing:-1px;text-transform:uppercase;color:var(--bone)}
+  .v5 h1::before,.v5 h1::after{content:"OUT NOW";position:absolute;top:0;left:0;width:100%;height:100%;text-align:center}
+  .v5 h1::before{color:#FF0033;transform:translate(-3px,0);mix-blend-mode:screen;opacity:.85}
+  .v5 h1::after{color:#00E5FF;transform:translate(3px,0);mix-blend-mode:screen;opacity:.85}
+  .v5 .credits{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:5px;line-height:1.7;text-transform:uppercase;color:var(--bone);text-align:center;max-width:880px}
+  .v5 .credits .feat{color:#00E5FF}
+  .v5 .cov-wrap{position:relative;width:580px;height:580px;border:1px solid rgba(220,38,38,.6);box-shadow:0 0 0 12px rgba(0,0,0,.5),0 0 80px rgba(220,38,38,.35);filter:saturate(1.05) contrast(1.05)}
+  .v5 .cov-wrap img{width:100%;height:100%;object-fit:cover;display:block}
+  .v5 .chroma-r,.v5 .chroma-c{position:absolute;inset:0;background:url("./cover.jpg") center/cover;mix-blend-mode:screen;opacity:.4;pointer-events:none}
+  .v5 .chroma-r{transform:translate(-6px,0);filter:hue-rotate(-30deg) saturate(2);background-blend-mode:multiply}
+  .v5 .chroma-c{transform:translate(6px,0);filter:hue-rotate(180deg) saturate(2)}
+  .v5 .bars{position:absolute;bottom:160px;left:64px;right:64px;display:flex;align-items:flex-end;justify-content:center;gap:4px;height:48px;z-index:4;pointer-events:none}
+  .v5 .bars span{display:block;width:8px;background:linear-gradient(180deg,#00E5FF,#DC2626);border-radius:1px;box-shadow:0 0 8px rgba(0,229,255,.5)}
+  .v5 .meta-row{display:flex;justify-content:space-between;align-items:center;width:100%;font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:3px;color:rgba(242,234,224,.7);text-transform:uppercase}
+  .v5 .meta-row .right{color:#00E5FF}
+  .v5 .dsps{display:flex;gap:22px;align-items:center;color:var(--bone)}
+  .v5 .dsps .dsp{width:30px;height:30px;opacity:.85}
+  .v5 .lvrn-mark{position:absolute;bottom:24px;left:0;right:0;text-align:center;font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:10px;color:rgba(242,234,224,.4);text-transform:uppercase;z-index:5}
+
+  /* nav (hidden on export) */
+  .nav{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:rgba(20,20,20,.92);border:1px solid #2a2a2a;padding:10px 18px;border-radius:999px;display:flex;gap:14px;align-items:center;font-family:"JetBrains Mono",monospace;font-size:12px;color:#9a9a9a;z-index:100;backdrop-filter:blur(8px)}
+  .nav button{background:transparent;border:1px solid #2a2a2a;color:#bbb;padding:6px 10px;border-radius:999px;font:inherit;cursor:pointer}
+</style>
+</head>
+<body>
+
+<!-- shared inline SVG DSPs (re-referenced 5x; CSS handles size per variant) -->
+<svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <symbol id="i-spotify" viewBox="0 0 24 24"><path fill="currentColor" d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></symbol>
+    <symbol id="i-apple" viewBox="0 0 24 24"><path fill="currentColor" d="M23.994 6.124a9.23 9.23 0 00-.24-2.19c-.317-1.31-1.062-2.31-2.18-3.043a5.022 5.022 0 00-1.877-.726 10.496 10.496 0 00-1.564-.15c-.04-.003-.083-.01-.124-.013H5.986c-.152.01-.303.017-.455.026-.747.043-1.49.123-2.193.4-1.336.53-2.3 1.452-2.865 2.78-.192.448-.292.925-.363 1.408-.056.392-.088.785-.1 1.18 0 .032-.007.062-.01.093v12.223c.01.14.017.283.027.424.05.815.154 1.624.497 2.373.65 1.42 1.738 2.353 3.234 2.801.42.127.856.187 1.293.228.555.053 1.11.06 1.667.06h11.03a12.5 12.5 0 001.57-.1c.822-.106 1.596-.35 2.295-.81a5.046 5.046 0 001.88-2.207c.186-.42.293-.87.37-1.324.113-.675.138-1.358.137-2.04-.002-3.8 0-7.595-.003-11.393zm-6.423 3.99v5.712c0 .417-.058.827-.244 1.206-.29.59-.76.962-1.388 1.14-.35.1-.706.157-1.07.173-.95.045-1.773-.6-1.943-1.536a1.88 1.88 0 011.038-2.022c.323-.16.67-.25 1.018-.324.378-.082.758-.153 1.134-.24.274-.063.457-.23.51-.516a.904.904 0 00.02-.193c0-1.815 0-3.63-.002-5.443a.725.725 0 00-.026-.185c-.04-.15-.15-.243-.304-.234-.16.01-.318.035-.475.066-.76.15-1.52.303-2.28.456l-2.325.47-1.374.278c-.016.003-.032.01-.048.013-.277.077-.377.203-.39.49-.002.042 0 .086 0 .13-.002 2.602 0 5.204-.003 7.805 0 .42-.047.836-.215 1.227-.278.64-.77 1.04-1.434 1.233-.35.1-.71.16-1.075.172-.96.036-1.755-.6-1.92-1.544-.14-.812.23-1.685 1.154-2.075.357-.15.73-.232 1.108-.31.287-.06.575-.116.86-.177.383-.083.583-.323.6-.714v-.15c0-2.96 0-5.922.002-8.882 0-.123.013-.25.042-.37.07-.285.273-.448.546-.518.255-.066.515-.112.774-.165.733-.15 1.466-.296 2.2-.444l2.27-.46c.67-.134 1.34-.27 2.01-.403.22-.043.442-.088.663-.106.31-.025.523.17.554.482.008.073.012.148.012.223.002 1.91.002 3.822 0 5.732z"/></symbol>
+    <symbol id="i-yt" viewBox="0 0 24 24"><path fill="currentColor" d="M12 0C5.376 0 0 5.376 0 12s5.376 12 12 12 12-5.376 12-12S18.624 0 12 0zm0 19.104c-3.924 0-7.104-3.18-7.104-7.104S8.076 4.896 12 4.896s7.104 3.18 7.104 7.104-3.18 7.104-7.104 7.104zm0-13.332c-3.432 0-6.228 2.796-6.228 6.228S8.568 18.228 12 18.228s6.228-2.796 6.228-6.228S15.432 5.772 12 5.772zM9.684 15.54V8.46L15.816 12l-6.132 3.54z"/></symbol>
+    <symbol id="i-am" viewBox="0 0 24 24"><path fill="currentColor" d="M.331 11.378s.5418-.089.765.1439c.2234.2332.077.7156-.2195.7237-.2965.01-.5705.063-.765-.1439-.1946-.2066-.1424-.6218.2195-.7237m5.881 3.2925c-.0522.01-.1075-.018-.164-.059-.3884-.5413-.5287-2.3923-.707-2.5025-.185-.1144-.8545 1.0255-2.1862.903-.5569-.051-1.1236-.4121-1.4573-.662.031-.4206.0364-1.4027.8659-1.0833.5038.1939 1.3667.7266 2.1245-.23.8378-1.0579 1.2999-.7506 1.577-.5206.2771.23.0925 1.4259.5058 1.0916.4133-.3343 2.082-2.4103 2.082-2.4103s1.292-1.303 1.4898.067c.1979 1.3698 1.0403 2.8877 1.2635 2.8445.2234-.043 2.8223-5.3253 3.1945-5.666.3722-.3409 1.6252-.2961 1.5657.5781-.0596.8742-.1871 6.308-.1871 6.308s-.147 1.5311.0924.7128c.0992-.3392.206-.6453.3392-1.0024.6414-2.0534 1.734-5.5613 2.2784-7.3688.1252-.4325.233-.8037.3166-1.0891l.0001-.0008a3.5925 3.5925 0 0 1 .0973-.3305c.0455-.1532.0763-.2546.0858-.2813.0243-.068.0925-.1192.1884-.157.0962-.061.1995-.064.3165-.067.3021-.027.6907.012 1.0401.1119.1018 0 .2125.037.3172.1118v.0001s.0063 0 .0151.01c.0023 0 .0048 0 .0073.01.0219.015.0573.045.0983.095.0012 0 .0025 0 .004.01.017.021.0341.045.0515.073.1952.2863.315.814.1948 1.7498-.2996 2.3354-.5316 7.1397-.5316 7.1397s-.0461.2298.4353-.782c.0167-.035.0383-.066.058-.098.026-.017.0552-.042.0913-.085.2974-.3546 1.0968-.5629 1.6512-.5586.2336.028.4293.087.5462.1609.2188.333.0897 1.562.0897 1.562-.4612.043-1.3403.2908-1.6519.3366-.3118.046-.7852 2.0699-1.4433 1.8629-.6581-.2069-2.1246-1.1268-2.1246-1.2533 0-.1102.1152-1.4546.1453-1.8016.0022-.024.004-.046.0058-.068a.152.152 0 0 1 .0014-.014l-.0002.0003c.0213-.2733.0023-.3927-.1239-.1199-.1086.2346-.581 1.7359-1.1078 3.3709-.0556.1429-1.0511 3.1558-1.1818 3.5231-.156.4261-.287.7523-.3776.921-.1378.1867-.3234.3036-.5826.2252-.6465-.1954-1.4654-1.0889-1.473-1.3106-.0155-1.2503.0608-7.973-.2423-7.4127-.311.5744-2.73 4.5608-2.73 4.5608-.0405.01-.0705.01-.1062.01-.1712-.019-.4366-.074-.51-.2384-.004-.01-.0094-.018-.0129-.028-.0035-.01-.0075-.022-.0135-.04-.0329-.1097-.0463-.2289-.0753-.3265-.1082-.3652-.2813-.8886-.463-1.421-.2784-.9079-.5654-1.8366-.6127-1.9391-.0923-.2007-.2268-.116-.3475-.0002-.54.458-1.6868 2.4793-2.7225 2.5898"/></symbol>
+    <symbol id="i-bp" viewBox="0 0 24 24"><path fill="currentColor" d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm-2.25 6.75h4.125c2.485 0 4.5 1.679 4.5 4.125 0 1.292-.563 2.438-1.444 3.214.881.777 1.444 1.922 1.444 3.215 0 2.446-2.015 4.125-4.5 4.125H9.75V6.75zm2.625 2.625v3h1.5c.828 0 1.5-.672 1.5-1.5s-.672-1.5-1.5-1.5h-1.5zm0 5.625v3.375h1.5c.94 0 1.7-.756 1.7-1.688 0-.93-.76-1.687-1.7-1.687h-1.5z"/></symbol>
+    <symbol id="i-tidal" viewBox="0 0 24 24"><path fill="currentColor" d="M12.012 3.992L8.008 7.996 4.004 3.992 0 7.996 4.004 12l4.004-4.004L12.012 12l-4.004 4.004 4.004 4.004 4.004-4.004L12.012 12l4.004-4.004-4.004-4.004zM16.042 7.996l3.979-3.979L24 7.996l-3.979 3.979z"/></symbol>
+    <symbol id="i-dz" viewBox="0 0 24 24"><path fill="currentColor" d="M.693 10.024c.381 0 .693-1.256.693-2.807 0-1.55-.312-2.807-.693-2.807C.312 4.41 0 5.666 0 7.217s.312 2.808.693 2.808ZM21.038 1.56c-.364 0-.684.805-.91 2.096C19.765 1.446 19.184 0 18.526 0c-.78 0-1.464 2.036-1.784 5-.312-2.158-.788-3.536-1.325-3.536-.745 0-1.386 2.704-1.62 6.472-.442-1.932-1.083-3.145-1.793-3.145s-1.35 1.213-1.793 3.145c-.242-3.76-.874-6.463-1.628-6.463-.537 0-1.013 1.378-1.325 3.535C6.938 2.036 6.262 0 5.474 0c-.658 0-1.247 1.447-1.602 3.665-.217-1.291-.546-2.105-.91-2.105-.675 0-1.221 2.807-1.221 6.272 0 3.466.546 6.273 1.221 6.273.277 0 .537-.476.736-1.273.32 2.928.996 4.938 1.776 4.938.606 0 1.143-1.204 1.507-3.11.251 3.622.875 6.195 1.602 6.195.46 0 .875-1.023 1.187-2.677C10.142 21.6 11 24 12.004 24c1.005 0 1.863-2.4 2.235-5.822.312 1.654.727 2.677 1.186 2.677.728 0 1.352-2.573 1.603-6.195.364 1.906.9 3.11 1.507 3.11.78 0 1.455-2.01 1.775-4.938.208.797.46 1.273.737 1.273.675 0 1.22-2.807 1.22-6.273-.008-3.457-.553-6.272-1.23-6.272ZM23.307 10.024c.381 0 .693-1.256.693-2.807 0-1.55-.312-2.807-.693-2.807-.381 0-.693 1.256-.693 2.807s.312 2.808.693 2.808Z"/></symbol>
+  </defs>
+</svg>
+
+<div class="deck" id="deck">
+
+  <!-- =================================== V1 BRUTALIST HEIST =================================== -->
+  <section class="slide v1" id="s1">
+    <div class="bg"></div>
+    <div class="drip"></div><div class="drip right"></div>
+    <div class="badge">V1 · BRUTALIST HEIST · drop-kit house style</div>
+    <div class="frame">
+      <div class="topblock">
+        <div class="stamp"><span class="dot"></span>NOW STREAMING · 05 JUN 2026</div>
+        <h1 class="chrome">OUT NOW</h1>
+        <div class="duo">KAYGEERSA · DEEJAY 9INE · BLVKSTONE<br/><span class="feat">FT.</span> JAYY SCOTT · DEREAL BONILE</div>
+      </div>
+      <div class="cover-wrap">
+        <img src="./cover.jpg" alt="Jazzino cover" />
+        <div class="cover-corner">JAZZINO · SINGLE</div>
+      </div>
+      <div class="dsps">
+        <svg class="dsp"><use href="#i-spotify"/></svg>
+        <svg class="dsp"><use href="#i-apple"/></svg>
+        <svg class="dsp"><use href="#i-yt"/></svg>
+        <svg class="dsp"><use href="#i-am"/></svg>
+        <svg class="dsp"><use href="#i-bp"/></svg>
+        <svg class="dsp"><use href="#i-tidal"/></svg>
+        <svg class="dsp"><use href="#i-dz"/></svg>
+      </div>
+    </div>
+    <div class="grain"></div>
+    <div class="lvrn">LVRN · JAZZINO · 2026</div>
+  </section>
+
+  <!-- =================================== V2 PENTAGRAM GRID =================================== -->
+  <section class="slide v2" id="s2">
+    <div class="badge" style="border-color:rgba(0,0,0,.2);background:rgba(255,255,255,.85);color:var(--ink)">V2 · PENTAGRAM GRID · Swiss info-architecture</div>
+    <div class="frame">
+      <div class="row-top">
+        <div class="left"><span class="dot"></span>LVRN · MUSIC</div>
+        <div class="right">No. 014 · OUT NOW · 05.06.2026</div>
+      </div>
+
+      <div class="big">
+        <h1>OUT<br/>NOW.</h1>
+        <div class="meta">KAYGEERSA · COLLAB · JAZZINO · 2026 · LVRN</div>
+      </div>
+
+      <div class="grid-body">
+        <div class="cov"><img src="./cover.jpg" alt="Jazzino cover" /></div>
+        <div class="specs">
+          <div class="row">
+            <div class="k">TITLE</div>
+            <div class="v"><strong>JAZZINO</strong></div>
+          </div>
+          <div class="row">
+            <div class="k">FORMAT</div>
+            <div class="v">Single · 1 track</div>
+          </div>
+          <div class="row">
+            <div class="k">ARTISTS</div>
+            <div class="v">KaygeeRSA<br/>Deejay 9ine<br/>Blvkstone<br/><span style="color:var(--oxblood)">ft.</span> Jayy Scott<br/><span style="color:var(--oxblood)">ft.</span> Dereal Bonile</div>
+          </div>
+          <div class="row">
+            <div class="k">RELEASE</div>
+            <div class="v"><strong>05 June 2026</strong></div>
+          </div>
+          <div class="row">
+            <div class="k">LABEL</div>
+            <div class="v">LVRN</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row-bot">
+        <div>STREAM ON →</div>
+        <div class="dsps">
+          <svg class="dsp"><use href="#i-spotify"/></svg>
+          <svg class="dsp"><use href="#i-apple"/></svg>
+          <svg class="dsp"><use href="#i-yt"/></svg>
+          <svg class="dsp"><use href="#i-am"/></svg>
+          <svg class="dsp"><use href="#i-bp"/></svg>
+          <svg class="dsp"><use href="#i-tidal"/></svg>
+          <svg class="dsp"><use href="#i-dz"/></svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================================== V3 KENYA HARA QUIET =================================== -->
+  <section class="slide v3" id="s3">
+    <div class="badge" style="border-color:rgba(0,0,0,.15);background:rgba(255,255,255,.85);color:var(--ink)">V3 · KENYA HARA · quiet minimalism · 东方极简</div>
+    <div class="frame">
+      <div class="head-row">
+        <div>LVRN —</div>
+        <div class="right">JAZZINO<br/>No. 014</div>
+      </div>
+
+      <div class="cover-zone">
+        <div class="cov"><img src="./cover.jpg" alt="Jazzino cover" /></div>
+        <div class="rule"></div>
+        <div class="copy">
+          <div class="out-now">out <span class="dot"></span> now</div>
+          <div class="artist">KaygeeRSA, Deejay 9ine &amp; Blvkstone<br/><span style="font-size:24px;color:#666">featuring Jayy Scott &amp; Dereal Bonile</span></div>
+        </div>
+      </div>
+
+      <div class="foot">
+        <div>05 · 06 · 2026</div>
+        <div class="dsps">
+          <svg class="dsp"><use href="#i-spotify"/></svg>
+          <svg class="dsp"><use href="#i-apple"/></svg>
+          <svg class="dsp"><use href="#i-yt"/></svg>
+          <svg class="dsp"><use href="#i-am"/></svg>
+          <svg class="dsp"><use href="#i-bp"/></svg>
+          <svg class="dsp"><use href="#i-tidal"/></svg>
+          <svg class="dsp"><use href="#i-dz"/></svg>
+        </div>
+        <div>LVRN —</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================================== V4 SAGMEISTER EXPERIMENTAL =================================== -->
+  <section class="slide v4" id="s4">
+    <div class="badge" style="background:rgba(255,255,255,.85);border-color:rgba(0,0,0,.2);color:var(--ink)">V4 · SAGMEISTER · experimental, brush-dominant</div>
+
+    <div class="splat-1">OUT</div>
+    <div class="splat-2">NOW.</div>
+
+    <div class="tag-top"><span class="dot"></span>LVRN · NEW MUSIC · 05.06.26</div>
+    <div class="artist-strip">KAYGEERSA · DEEJAY 9INE · BLVKSTONE<br/><span class="feat">FT.</span> JAYY SCOTT · DEREAL BONILE</div>
+
+    <div class="cov-wrap"><img src="./cover.jpg" alt="Jazzino cover" /></div>
+
+    <div class="scribble-arrow">
+      ← jazzino<br/>
+      <span class="lbl">single · out now</span>
+    </div>
+
+    <div class="corner-mark">stream<br/>it.</div>
+
+    <div class="ribbon">
+      <div class="left"><span class="arrow">→</span>link in bio</div>
+      <div class="dsps">
+        <svg class="dsp"><use href="#i-spotify"/></svg>
+        <svg class="dsp"><use href="#i-apple"/></svg>
+        <svg class="dsp"><use href="#i-yt"/></svg>
+        <svg class="dsp"><use href="#i-am"/></svg>
+        <svg class="dsp"><use href="#i-bp"/></svg>
+        <svg class="dsp"><use href="#i-tidal"/></svg>
+        <svg class="dsp"><use href="#i-dz"/></svg>
+      </div>
+    </div>
+    <div class="lvrn">LVRN · 2026 · JAZZINO</div>
+  </section>
+
+  <!-- =================================== V5 FIELD.IO MOTION POSTER =================================== -->
+  <section class="slide v5" id="s5">
+    <div class="bg-grid"></div>
+    <div class="ring r1"></div>
+    <div class="ring r2"></div>
+    <div class="ring r3"></div>
+    <div class="ring-text">
+      <svg viewBox="0 0 880 880">
+        <defs>
+          <path id="circ" d="M 440,440 m -360,0 a 360,360 0 1,1 720,0 a 360,360 0 1,1 -720,0"/>
+        </defs>
+        <text><textPath href="#circ" startOffset="0">LVRN · JAZZINO · 05.06.2026 · KAYGEERSA × DEEJAY 9INE × BLVKSTONE · </textPath></text>
+      </svg>
+    </div>
+
+    <div class="badge" style="background:rgba(0,229,255,.1);border-color:rgba(0,229,255,.4);color:#00E5FF">V5 · FIELD.IO · chromatic motion-poster</div>
+
+    <div class="frame">
+      <div class="top">
+        <div class="stamp"><span class="dot"></span>SIG.LIVE · 05.06.2026</div>
+        <h1>OUT NOW</h1>
+        <div class="credits">KAYGEERSA · DEEJAY 9INE · BLVKSTONE<br/><span class="feat">FT.</span> JAYY SCOTT · DEREAL BONILE</div>
+      </div>
+
+      <div class="cov-wrap"><img src="./cover.jpg" alt="Jazzino cover" /></div>
+
+      <div style="width:100%;display:flex;flex-direction:column;gap:24px;align-items:center">
+        <div class="meta-row">
+          <div>SYS // JAZZINO.MP3</div>
+          <div class="right">★ LIVE_NOW</div>
+        </div>
+        <div class="dsps">
+          <svg class="dsp"><use href="#i-spotify"/></svg>
+          <svg class="dsp"><use href="#i-apple"/></svg>
+          <svg class="dsp"><use href="#i-yt"/></svg>
+          <svg class="dsp"><use href="#i-am"/></svg>
+          <svg class="dsp"><use href="#i-bp"/></svg>
+          <svg class="dsp"><use href="#i-tidal"/></svg>
+          <svg class="dsp"><use href="#i-dz"/></svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="bars" id="bars"></div>
+    <div class="scanlines"></div>
+    <div class="lvrn-mark">LVRN _ 2026 _ JAZZINO</div>
+  </section>
+
+</div>
+
+<div class="nav">
+  <button onclick="g(-1)">◀</button>
+  <span id="ct" style="color:#fff;font-weight:700;min-width:50px;text-align:center">01 / 05</span>
+  <button onclick="g(1)">▶</button>
+  <button onclick="window.print()" style="border-color:#DC2626;color:#fff">⤓ PDF</button>
+</div>
+
+<script>
+  // generate spectrum bars for V5
+  const bars = document.getElementById('bars');
+  if(bars){
+    const N = 56;
+    let html='';
+    for(let i=0;i<N;i++){
+      // pseudo-spectrum: rough bell with jitter
+      const x = (i - N/2) / (N/2);
+      const base = Math.max(8, (1 - x*x) * 40);
+      const j = Math.sin(i*1.7) * 6 + Math.cos(i*2.3) * 4;
+      const h = Math.max(6, base + j);
+      html += `<span style="height:${h}px"></span>`;
+    }
+    bars.innerHTML = html;
+  }
+
+  // keyboard nav
+  const slides=document.querySelectorAll('.slide');let i=0;
+  function g(d){i=Math.max(0,Math.min(slides.length-1,i+d));slides[i].scrollIntoView({behavior:'smooth',block:'center'});document.getElementById('ct').textContent=String(i+1).padStart(2,'0')+' / 05'}
+  document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' '){e.preventDefault();g(1)}if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();g(-1)}});
+</script>
+</body>
+</html>
